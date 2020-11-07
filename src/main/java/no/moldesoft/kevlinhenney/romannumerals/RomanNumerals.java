@@ -5,7 +5,7 @@ import java.util.List;
 
 public class RomanNumerals {
 
-    private List<Pair> pairs = Arrays.asList(
+    private final List<Pair> pairs = Arrays.asList(
             Pair.of(1000, "M"), Pair.of(900, "CM"),
             Pair.of(500, "D"), Pair.of(400, "CD"),
             Pair.of(100, "C"), Pair.of(90, "XC"),
