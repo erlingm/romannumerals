@@ -2,8 +2,15 @@ package no.moldesoft.kevlinhenney.romannumerals;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class RomanNumerals {
+
+    /**
+     * From Joshua Bloch - Effective Java 3rd edition - item 6
+     */
+    private static final Pattern ROMAN_PATTERN =
+            Pattern.compile("^(?=.)M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$", Pattern.CASE_INSENSITIVE);
 
     private final List<Pair> pairs = Arrays.asList(
             Pair.of(1000, "M"), Pair.of(900, "CM"),
@@ -15,7 +22,7 @@ public class RomanNumerals {
             Pair.of(1, "I")
     );
 
-    private String roman(int number) {
+    public String roman(int number) {
         StringBuilder stringBuilder = new StringBuilder();
         for (Pair pair : pairs) {
             for (int i = 0, l = number / pair.value; i < l; i++) {
@@ -24,6 +31,13 @@ public class RomanNumerals {
             number %= pair.value;
         }
         return stringBuilder.toString();
+    }
+
+    /**
+     * From Joshua Bloch - Effective Java 3rd edition - item 6
+     */
+    public boolean isRoman(String numeral) {
+        return ROMAN_PATTERN.matcher(numeral).matches();
     }
 
     public static void main(String[] args) {
